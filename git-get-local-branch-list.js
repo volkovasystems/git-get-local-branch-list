@@ -91,13 +91,12 @@ var gitGetLocalBranchList = function gitGetLocalBranchList( repositoryDirectory,
 						}else if( isValid ){
 							output = output.trim( );
 							var localBranchList = output.split( NEW_LINE_PATTERN );
-							localBranchList.splice( 0, 1 );
 
 							var localBranchName = "";
 							var localBranchListLength = localBranchList.length;
 							for( var index = 0; index < localBranchListLength; index++ ){
 								localBranchName = localBranchList[ index ];
-								localBranchName = localBranchName.replace( ORIGIN_PREFIX_PATTERN, "" );
+								localBranchName = localBranchName.replace( EXCESS_PREFIX_CHARACTER_PATTERN, "" );
 								localBranchList[ index ] = localBranchName;
 							}
 
@@ -120,7 +119,7 @@ var gitGetLocalBranchList = function gitGetLocalBranchList( repositoryDirectory,
 
 const GIT_GET_LOCAL_BRANCH_LIST_DIRECTORY_PATTERN = /git-get-local-branch-list$/;
 const NEW_LINE_PATTERN = /\n(?:\s*)?/;
-const ORIGIN_PREFIX_PATTERN = /^origin\//;
+const EXCESS_PREFIX_CHARACTER_PATTERN = /^\W*/;
 
 var work = require( "./work/work.js" );
 var gitExists = require( "./git-exists/git-exists.js" );
